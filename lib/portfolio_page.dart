@@ -67,7 +67,7 @@ class PortfolioPage extends StatelessWidget {
   // --- DỮ LIỆU KINH NGHIỆM (EXPERIENCE) ---
   final String experienceStatus = 'Chưa có';
   final String experienceDescription =
-      'Hiện tại mình chưa có kinh nghiệm làm việc thực tế tại doanh nghiệp. Đang chủ động trau dồi năng lực thông qua các bài tập lớn, đồ án chuyên ngành và nghiên cứu công nghệ.';
+      'Hiện tại mình chưa có kinh nghiệm làm việc thực tế tại doanh nghiệp. Đang chủ động trau dồi năng lực thông qua các bài tập lớn, đồ án chuyên ngành và tự nghiên cứu công nghệ mới.';
 
   // --- DỮ LIỆU DỰ ÁN ĐÃ LÀM (PROJECTS) ---
   final List<Map<String, dynamic>> projectsList = const [
@@ -229,9 +229,11 @@ class PortfolioPage extends StatelessWidget {
                   const SizedBox(height: 14.0),
 
                   // ==========================================================
+                  // [NHÓM 1: THÔNG TIN CÁ NHÂN]
+                  // ==========================================================
+
                   // 5. THẺ GIỚI THIỆU BẢN THÂN (ABOUT ME)
                   // - Minh họa sự lồng ghép cấu trúc: Card ➔ Padding ➔ Column ➔ [Row, Text]
-                  // ==========================================================
                   Card(
                     elevation: 1.5,
                     margin: const EdgeInsets.symmetric(vertical: 6.0),
@@ -282,214 +284,8 @@ class PortfolioPage extends StatelessWidget {
                     ),
                   ),
 
-                  // ==========================================================
-                  // 6. THẺ KỸ NĂNG (SKILLS) - YÊU CẦU MỚI: Phân tích yêu cầu, Python, HTML, CSS...
-                  // - Minh họa: Card ➔ Padding ➔ Column ➔ [Row tiêu đề, Wrap danh sách kỹ năng]
-                  // - Từng chip kỹ năng dùng Container và Row nhỏ bên trong.
-                  // ==========================================================
-                  Card(
-                    elevation: 1.5,
-                    margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    color: const Color(0xFFF8FAFC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
-                    ),
-                    // [Padding]: Đệm viền trong 16px bao trọn khối danh sách kỹ năng
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      // [Column]: Xếp chồng theo chiều dọc: Hàng tiêu đề ở trên, các chip kỹ năng ở dưới
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // [Row]: Tiêu đề mục kỹ năng (Icon + Chữ nằm trên cùng một hàng ngang)
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.psychology_rounded,
-                                color: Color(0xFF7C3AED), // Màu tím sáng tạo
-                                size: 22.0,
-                              ),
-                              const SizedBox(width: 8.0),
-                              const Text(
-                                'Kỹ năng (Skills)',
-                                style: TextStyle(
-                                  fontSize: 14.5,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF1E293B),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12.0),
-
-                          // [Wrap]: Bố cục tự động rớt dòng khi các thẻ kỹ năng vượt quá chiều ngang màn hình
-                          Wrap(
-                            spacing: 8.0,
-                            runSpacing: 8.0,
-                            children: skillsList.map((skill) {
-                              return _buildSkillChip(
-                                skill['name'] as String,
-                                skill['icon'] as IconData,
-                                skill['color'] as Color,
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ==========================================================
-                  // 7. THẺ KINH NGHIỆM (EXPERIENCE) - YÊU CẦU MỚI: Kinh nghiệm: chưa có
-                  // - Cấu trúc lồng ghép: Card ➔ Padding ➔ Column ➔ [Row tiêu đề, Row trạng thái & Container badge, Text mô tả]
-                  // ==========================================================
-                  Card(
-                    elevation: 1.5,
-                    margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    color: const Color(0xFFF8FAFC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
-                    ),
-                    // [Padding]: Tạo không gian đệm 16px bên trong thẻ kinh nghiệm
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      // [Column]: Xếp các hàng nội dung kinh nghiệm theo chiều dọc
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // [Row]: Tiêu đề mục kinh nghiệm (Icon + Text nằm ngang)
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.work_outline_rounded,
-                                color: Color(0xFF0284C7), // Xanh lam công việc
-                                size: 22.0,
-                              ),
-                              SizedBox(width: 8.0),
-                              Text(
-                                'Kinh nghiệm (Experience)',
-                                style: TextStyle(
-                                  fontSize: 14.5,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF1E293B),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10.0),
-
-                          // [Row]: Dòng hiển thị trạng thái kinh nghiệm kèm nhãn Container nổi bật
-                          Row(
-                            children: [
-                              // [Container]: Khối hộp nhãn badge thông báo trạng thái kinh nghiệm
-                              // Có viền bo góc tròn và màu nền cam nhẹ nhàng
-                              Container(
-                                // [Padding]: Đệm bên trong khối nhãn badge
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFFFF7ED), // Cam sáng dịu mắt
-                                  borderRadius: BorderRadius.circular(8.0), // Bo nhẹ các góc
-                                  border: Border.all(color: const Color(0xFFFDBA74)), // Đường viền mảnh
-                                ),
-                                child: Text(
-                                  experienceStatus,
-                                  style: const TextStyle(
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFFEA580C),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10.0),
-                              const Expanded(
-                                child: Text(
-                                  'Sinh viên đang tích lũy kiến thức',
-                                  style: TextStyle(
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF475569),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8.0),
-
-                          // Đoạn văn bản giải thích chi tiết quá trình học tập và rèn luyện
-                          Text(
-                            experienceDescription,
-                            style: const TextStyle(
-                              fontSize: 13.0,
-                              color: Color(0xFF64748B),
-                              height: 1.5,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ==========================================================
-                  // 8. THẺ DỰ ÁN ĐÃ LÀM (PROJECTS) - YÊU CẦU MỚI: Quản lý phòng tập gym, Chatbot hỏi đáp tài liệu
-                  // - Minh họa: Card ➔ Padding ➔ Column ➔ [Row tiêu đề, Các Container khối dự án với Column bên trong]
-                  // ==========================================================
-                  Card(
-                    elevation: 1.5,
-                    margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    color: const Color(0xFFF8FAFC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
-                    ),
-                    // [Padding]: Vùng đệm 16px bao bọc xung quanh toàn bộ khối dự án
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      // [Column]: Xếp tiêu đề và danh sách 2 dự án theo thứ tự từ trên xuống dưới
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // [Row]: Tiêu đề mục dự án nằm ngang
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.rocket_launch_rounded,
-                                color: Color(0xFFEA580C), // Cam nhiệt huyết / bứt phá
-                                size: 22.0,
-                              ),
-                              SizedBox(width: 8.0),
-                              Text(
-                                'Dự án đã làm (Projects)',
-                                style: TextStyle(
-                                  fontSize: 14.5,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF1E293B),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12.0),
-
-                          // Render danh sách dự án bằng cách duyệt mảng projectsList
-                          ...projectsList.map((project) {
-                            return _buildProjectItem(
-                              title: project['title'] as String,
-                              category: project['category'] as String,
-                              description: project['description'] as String,
-                              icon: project['icon'] as IconData,
-                              accentColor: project['color'] as Color,
-                            );
-                          }),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ==========================================================
-                  // 9. THẺ HỌC VẤN & CHUYÊN NGÀNH
+                  // 6. THẺ HỌC VẤN & CHUYÊN NGÀNH
                   // - Lồng ghép: Card ➔ Padding ➔ Row [Icon, Expanded ➔ Column [Text bậc học, Text ngành]]
-                  // ==========================================================
                   Card(
                     elevation: 1.5,
                     margin: const EdgeInsets.symmetric(vertical: 6.0),
@@ -540,166 +336,8 @@ class PortfolioPage extends StatelessWidget {
                     ),
                   ),
 
-                  // ==========================================================
-                  // 10. THẺ SỐ ĐIỆN THOẠI (CARD + PADDING + ROW + EXPANDED + COLUMN)
-                  // ==========================================================
-                  Card(
-                    elevation: 1.5,
-                    margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    color: const Color(0xFFF8FAFC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
-                    ),
-                    // [Padding]: Vùng đệm 16px ngang và 12px dọc bên trong thẻ SĐT
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                      // [Row]: Xếp biểu tượng Điện thoại và Cột số điện thoại nằm ngang
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.phone_rounded,
-                            color: Color(0xFF0D9488), // Xanh ngọc liên lạc
-                            size: 24.0,
-                          ),
-                          const SizedBox(width: 16.0),
-                          Expanded(
-                            // [Column]: Xếp nhãn chú thích ở trên và số điện thoại ở dưới
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Số điện thoại liên hệ',
-                                  style: TextStyle(
-                                    fontSize: 11.0,
-                                    color: Color(0xFF94A3B8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  phoneNumber,
-                                  style: const TextStyle(
-                                    fontSize: 14.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF1E293B),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ==========================================================
-                  // 11. THẺ EMAIL (CARD + PADDING + ROW + EXPANDED + COLUMN)
-                  // ==========================================================
-                  Card(
-                    elevation: 1.5,
-                    margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    color: const Color(0xFFF8FAFC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
-                    ),
-                    // [Padding]: Tạo khoảng đệm trong thẻ Email
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                      // [Row]: Bố cục trục ngang đưa icon thư tín đi cùng cột địa chỉ email
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.email_rounded,
-                            color: Color(0xFF2563EB), // Xanh dương hòm thư
-                            size: 24.0,
-                          ),
-                          const SizedBox(width: 16.0),
-                          Expanded(
-                            // [Column]: Sắp xếp tiêu đề phụ và địa chỉ email theo trục dọc
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Email học tập & công việc',
-                                  style: TextStyle(
-                                    fontSize: 11.0,
-                                    color: Color(0xFF94A3B8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  email,
-                                  style: const TextStyle(
-                                    fontSize: 14.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF1E293B),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ==========================================================
-                  // 12. THẺ ĐỊA CHỈ NƠI Ở (CARD + PADDING + ROW + EXPANDED + COLUMN)
-                  // ==========================================================
-                  Card(
-                    elevation: 1.5,
-                    margin: const EdgeInsets.symmetric(vertical: 6.0),
-                    color: const Color(0xFFF8FAFC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
-                    ),
-                    // [Padding]: Tạo vùng đệm ngang 16px, dọc 12px
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                      // [Row]: Bố cục trục ngang gồm biểu tượng vị trí và text địa chỉ
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on_rounded,
-                            color: Color(0xFFDC2626), // Đỏ ghim bản đồ
-                            size: 24.0,
-                          ),
-                          const SizedBox(width: 16.0),
-                          Expanded(
-                            // [Column]: Xếp tiêu đề và địa chỉ chi tiết theo chiều dọc
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Địa chỉ nơi ở',
-                                  style: TextStyle(
-                                    fontSize: 11.0,
-                                    color: Color(0xFF94A3B8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  address,
-                                  style: const TextStyle(
-                                    fontSize: 14.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF1E293B),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ==========================================================
-                  // 13. THẺ THÔNG TIN PHỤ (GIỚI TÍNH & NĂM SINH - CHIA 2 CỘT NGANG)
-                  // - Lồng ghép phức hợp: Card ➔ Padding ➔ Row [Cột 1 (Row + Column), Vạch ngăn Container, Cột 2 (Row + Column)]
-                  // ==========================================================
+                  // 7. THẺ THÔNG TIN PHỤ (GIỚI TÍNH & NĂM SINH - CHIA 2 CỘT NGANG)
+                  // - Lồng ghép: Card ➔ Padding ➔ Row [Cột 1 (Row + Column), Vạch ngăn Container, Cột 2 (Row + Column)]
                   Card(
                     elevation: 1.5,
                     margin: const EdgeInsets.symmetric(vertical: 6.0),
@@ -806,8 +444,160 @@ class PortfolioPage extends StatelessWidget {
                   ),
 
                   // ==========================================================
-                  // 14. THẺ GITHUB / DỰ ÁN MÃ NGUỒN (CARD + PADDING + ROW + EXPANDED + COLUMN)
+                  // [NHÓM 2: THÔNG TIN LIÊN LẠC]
                   // ==========================================================
+
+                  // 8. THẺ SỐ ĐIỆN THOẠI (CARD + PADDING + ROW + EXPANDED + COLUMN)
+                  Card(
+                    elevation: 1.5,
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
+                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
+                    ),
+                    // [Padding]: Vùng đệm 16px ngang và 12px dọc bên trong thẻ SĐT
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                      // [Row]: Xếp biểu tượng Điện thoại và Cột số điện thoại nằm ngang
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.phone_rounded,
+                            color: Color(0xFF0D9488), // Xanh ngọc liên lạc
+                            size: 24.0,
+                          ),
+                          const SizedBox(width: 16.0),
+                          Expanded(
+                            // [Column]: Xếp nhãn chú thích ở trên và số điện thoại ở dưới
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Số điện thoại liên hệ',
+                                  style: TextStyle(
+                                    fontSize: 11.0,
+                                    color: Color(0xFF94A3B8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  phoneNumber,
+                                  style: const TextStyle(
+                                    fontSize: 14.5,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF1E293B),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // 9. THẺ EMAIL (CARD + PADDING + ROW + EXPANDED + COLUMN)
+                  Card(
+                    elevation: 1.5,
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
+                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
+                    ),
+                    // [Padding]: Tạo khoảng đệm trong thẻ Email
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                      // [Row]: Bố cục trục ngang đưa icon thư tín đi cùng cột địa chỉ email
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.email_rounded,
+                            color: Color(0xFF2563EB), // Xanh dương hòm thư
+                            size: 24.0,
+                          ),
+                          const SizedBox(width: 16.0),
+                          Expanded(
+                            // [Column]: Sắp xếp tiêu đề phụ và địa chỉ email theo trục dọc
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Email học tập & công việc',
+                                  style: TextStyle(
+                                    fontSize: 11.0,
+                                    color: Color(0xFF94A3B8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  email,
+                                  style: const TextStyle(
+                                    fontSize: 14.5,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF1E293B),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // 10. THẺ ĐỊA CHỈ NƠI Ở (CARD + PADDING + ROW + EXPANDED + COLUMN)
+                  Card(
+                    elevation: 1.5,
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
+                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
+                    ),
+                    // [Padding]: Tạo vùng đệm ngang 16px, dọc 12px
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                      // [Row]: Bố cục trục ngang gồm biểu tượng vị trí và text địa chỉ
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_rounded,
+                            color: Color(0xFFDC2626), // Đỏ ghim bản đồ
+                            size: 24.0,
+                          ),
+                          const SizedBox(width: 16.0),
+                          Expanded(
+                            // [Column]: Xếp tiêu đề và địa chỉ chi tiết theo chiều dọc
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Địa chỉ nơi ở',
+                                  style: TextStyle(
+                                    fontSize: 11.0,
+                                    color: Color(0xFF94A3B8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  address,
+                                  style: const TextStyle(
+                                    fontSize: 14.5,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF1E293B),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // 11. THẺ GITHUB / DỰ ÁN MÃ NGUỒN (CARD + PADDING + ROW + EXPANDED + COLUMN)
                   Card(
                     elevation: 1.5,
                     margin: const EdgeInsets.symmetric(vertical: 6.0),
@@ -852,6 +642,208 @@ class PortfolioPage extends StatelessWidget {
                               ],
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // ==========================================================
+                  // [NHÓM 3: KỸ NĂNG, KINH NGHIỆM & DỰ ÁN]
+                  // ==========================================================
+
+                  // 12. THẺ KỸ NĂNG (SKILLS)
+                  // - Minh họa: Card ➔ Padding ➔ Column ➔ [Row tiêu đề, Wrap danh sách kỹ năng]
+                  // - Từng chip kỹ năng dùng Container và Row nhỏ bên trong.
+                  Card(
+                    elevation: 1.5,
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
+                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
+                    ),
+                    // [Padding]: Đệm viền trong 16px bao trọn khối danh sách kỹ năng
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      // [Column]: Xếp chồng theo chiều dọc: Hàng tiêu đề ở trên, các chip kỹ năng ở dưới
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // [Row]: Tiêu đề mục kỹ năng (Icon + Chữ nằm trên cùng một hàng ngang)
+                          Row(
+                            children: const [
+                              Icon(
+                                Icons.psychology_rounded,
+                                color: Color(0xFF7C3AED), // Màu tím sáng tạo
+                                size: 22.0,
+                              ),
+                              SizedBox(width: 8.0),
+                              Text(
+                                'Kỹ năng (Skills)',
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1E293B),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12.0),
+
+                          // [Wrap]: Bố cục tự động rớt dòng khi các thẻ kỹ năng vượt quá chiều ngang màn hình
+                          Wrap(
+                            spacing: 8.0,
+                            runSpacing: 8.0,
+                            children: skillsList.map((skill) {
+                              return _buildSkillChip(
+                                skill['name'] as String,
+                                skill['icon'] as IconData,
+                                skill['color'] as Color,
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // 13. THẺ KINH NGHIỆM (EXPERIENCE)
+                  // - Cấu trúc lồng ghép: Card ➔ Padding ➔ Column ➔ [Row tiêu đề, Row trạng thái & Container badge, Text mô tả]
+                  Card(
+                    elevation: 1.5,
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
+                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
+                    ),
+                    // [Padding]: Tạo không gian đệm 16px bên trong thẻ kinh nghiệm
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      // [Column]: Xếp các hàng nội dung kinh nghiệm theo chiều dọc
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // [Row]: Tiêu đề mục kinh nghiệm (Icon + Text nằm ngang)
+                          Row(
+                            children: const [
+                              Icon(
+                                Icons.work_outline_rounded,
+                                color: Color(0xFF0284C7), // Xanh lam công việc
+                                size: 22.0,
+                              ),
+                              SizedBox(width: 8.0),
+                              Text(
+                                'Kinh nghiệm (Experience)',
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1E293B),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10.0),
+
+                          // [Row]: Dòng hiển thị trạng thái kinh nghiệm kèm nhãn Container nổi bật
+                          Row(
+                            children: [
+                              // [Container]: Khối hộp nhãn badge thông báo trạng thái kinh nghiệm
+                              // Có viền bo góc tròn và màu nền cam nhẹ nhàng
+                              Container(
+                                // [Padding]: Đệm bên trong khối nhãn badge
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFFF7ED), // Cam sáng dịu mắt
+                                  borderRadius: BorderRadius.circular(8.0), // Bo nhẹ các góc
+                                  border: Border.all(color: const Color(0xFFFDBA74)), // Đường viền mảnh
+                                ),
+                                child: Text(
+                                  experienceStatus,
+                                  style: const TextStyle(
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color(0xFFEA580C),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10.0),
+                              const Expanded(
+                                child: Text(
+                                  'Sinh viên đang tích lũy kiến thức',
+                                  style: TextStyle(
+                                    fontSize: 12.5,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF475569),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8.0),
+
+                          // Đoạn văn bản giải thích chi tiết quá trình học tập và rèn luyện
+                          Text(
+                            experienceDescription,
+                            style: const TextStyle(
+                              fontSize: 13.0,
+                              color: Color(0xFF64748B),
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // 14. THẺ DỰ ÁN ĐÃ LÀM (PROJECTS)
+                  // - Minh họa: Card ➔ Padding ➔ Column ➔ [Row tiêu đề, Các Container khối dự án với Column bên trong]
+                  Card(
+                    elevation: 1.5,
+                    margin: const EdgeInsets.symmetric(vertical: 6.0),
+                    color: const Color(0xFFF8FAFC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
+                      side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
+                    ),
+                    // [Padding]: Vùng đệm 16px bao bọc xung quanh toàn bộ khối dự án
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      // [Column]: Xếp tiêu đề và danh sách 2 dự án theo thứ tự từ trên xuống dưới
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // [Row]: Tiêu đề mục dự án nằm ngang
+                          Row(
+                            children: const [
+                              Icon(
+                                Icons.rocket_launch_rounded,
+                                color: Color(0xFFEA580C), // Cam nhiệt huyết / bứt phá
+                                size: 22.0,
+                              ),
+                              SizedBox(width: 8.0),
+                              Text(
+                                'Dự án đã làm (Projects)',
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1E293B),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12.0),
+
+                          // Render danh sách dự án bằng cách duyệt mảng projectsList
+                          ...projectsList.map((project) {
+                            return _buildProjectItem(
+                              title: project['title'] as String,
+                              category: project['category'] as String,
+                              description: project['description'] as String,
+                              icon: project['icon'] as IconData,
+                              accentColor: project['color'] as Color,
+                            );
+                          }),
                         ],
                       ),
                     ),
